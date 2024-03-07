@@ -10,9 +10,7 @@ const SuggestionCard = ({ image, username, description }) => {
           <p className="text-sm font-semibold opacity-70">{description}</p>
         </div>
       </div>
-      <p className="text-blue-700 textsm font-semibold cursor-pointer">
-        Follow
-      </p>
+      <p className="text-blue-700 textsm font-semibold">Follow</p>
     </div>
   );
 };

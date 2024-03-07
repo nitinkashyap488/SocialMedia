@@ -33,7 +33,7 @@ const HomeRight = ({ suggestedUser }) => {
           <p className="font-semibold opacity-70">Suggestions for you</p>
           <p className="text-xs font-semibold opacity-95">View All</p>
         </div>
-        {/* <div className="space-y-5 mt-10">
+        <div className="space-y-5 mt-10">
           {suggestedUser.map((item, index) => (
             <SuggestionCard
               key={index}
@@ -44,11 +44,6 @@ const HomeRight = ({ suggestedUser }) => {
               username={item.username}
               description={"Follows you"}
             />
-          ))}
-        </div> */}
-        <div className="space-y-5 mt-10">
-          {user.popularUsers?.map((item) => (
-            <SuggestionCard user={item} />
           ))}
         </div>
         <div className="opacity-60 text-xs flex items-center flex-wrap mt-10">

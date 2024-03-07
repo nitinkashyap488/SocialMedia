@@ -1,22 +1,14 @@
-// export const signinAction = (data) => async (dispatch) => {
-//   const res = await fetch("http://localhost:5454/signin", {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: "Basic " + btoa(data.username + ":" + data.password),
-//     },
-//   });
-//   const token = await res.headers.get("Authorization");
-
 import { SIGN_IN, SIGN_UP } from "./ActionType";
 
-//   console.log("token from header :- ", token);
-//   const data = await res.json();
-// };
+// Define API base URL
+let API_BASE_URL = "http://localhost:5454";
+if (process.env.NODE_ENV === "production") {
+  API_BASE_URL = "socialmediaserver-production-5852.up.railway.app";
+}
 
 export const signinAction = (data) => async (dispatch) => {
   try {
-    const res = await fetch(`http://localhost:5454/signin`, {
+    const res = await fetch(`${API_BASE_URL}/signin`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +19,7 @@ export const signinAction = (data) => async (dispatch) => {
 
     localStorage.setItem("token", token);
     console.log("token from header :- ", token);
-    dispatch({type:SIGN_IN,payload:token})
+    dispatch({ type: SIGN_IN, payload: token });
   } catch (error) {
     console.log("catch error ", error);
   }
@@ -35,7 +27,7 @@ export const signinAction = (data) => async (dispatch) => {
 
 export const signupAction = (data) => async (dispatch) => {
   try {
-    const res = await fetch(`http://localhost:5454/signup`, {
+    const res = await fetch(`${API_BASE_URL}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +35,7 @@ export const signupAction = (data) => async (dispatch) => {
       body: JSON.stringify(data),
     });
     const user = await res.json();
-    console.log("Signup :- ",user)
+    console.log("Signup :- ", user);
     dispatch({ type: SIGN_UP, payload: user });
   } catch (error) {
     console.log("catch error ", error);

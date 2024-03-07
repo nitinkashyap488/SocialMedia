@@ -7,11 +7,16 @@ import {
   UPDATE_USER,
 } from "./ActionType";
 
+// Define API base URL
+let API_BASE_URL = "http://localhost:5454";
+if (process.env.NODE_ENV === "production") {
+  API_BASE_URL = "socialmediaserver-production-5852.up.railway.app";
+}
+
 export const getUserProfileAction = (token) => async (dispatch) => {
   try {
-    const res = await fetch("http://localhost:5454/api/users/profile", {
+    const res = await fetch(`${API_BASE_URL}/api/users/profile`, {
       method: "GET",
-
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
@@ -29,13 +34,11 @@ export const getUserProfileAction = (token) => async (dispatch) => {
 };
 
 export const findByUsernameAction = (data) => async (dispatch) => {
-  // console.log("find by username action data ---- ",data)
   try {
     const res = await fetch(
-      `http://localhost:5454/api/users/username/${data.username}`,
+      `${API_BASE_URL}/api/users/username/${data.username}`,
       {
         method: "GET",
-
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + data.token,
@@ -55,17 +58,13 @@ export const findByUsernameAction = (data) => async (dispatch) => {
 
 export const findByUserIdsAction = (data) => async (dispatch) => {
   try {
-    const res = await fetch(
-      `http://localhost:5454/api/users/multi/${data.userIds}`,
-      {
-        method: "GET",
-
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + data.jwt,
-        },
-      }
-    );
+    const res = await fetch(`${API_BASE_URL}/api/users/multi/${data.userIds}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + data.jwt,
+      },
+    });
 
     console.log(" -- res user ids --", res);
 
@@ -81,17 +80,13 @@ export const findByUserIdsAction = (data) => async (dispatch) => {
 
 export const followUserAction = (data) => async (dispatch) => {
   try {
-    const res = await fetch(
-      `http://localhost:5454/api/users/follow/${data.userId}`,
-      {
-        method: "PUT",
-
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + data.jwt,
-        },
-      }
-    );
+    const res = await fetch(`${API_BASE_URL}/api/users/follow/${data.userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + data.jwt,
+      },
+    });
 
     const users = await res.json();
 
@@ -106,10 +101,9 @@ export const followUserAction = (data) => async (dispatch) => {
 export const unFollowUserAction = (data) => async (dispatch) => {
   try {
     const res = await fetch(
-      `http://localhost:5454/api/users/unfollow/${data.userId}`,
+      `${API_BASE_URL}/api/users/unfollow/${data.userId}`,
       {
         method: "PUT",
-
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + data.jwt,
@@ -131,10 +125,9 @@ export const searchUserAction = (data) => async (dispatch) => {
   console.log("jwt --- ", data.jwt);
   try {
     const res = await fetch(
-      `http://localhost:5454/api/users/search?username=${data.query}`,
+      `${API_BASE_URL}/api/users/search?username=${data.query}`,
       {
         method: "GET",
-
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + data.jwt,
@@ -155,9 +148,8 @@ export const searchUserAction = (data) => async (dispatch) => {
 export const editUserDetailsAction = (data) => async (dispatch) => {
   console.log("data edit user --- ", data);
   try {
-    const res = await fetch(`http://localhost:5454/api/users/account/edit`, {
+    const res = await fetch(`${API_BASE_URL}/api/users/account/edit`, {
       method: "PUT",
-
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + data.jwt,
