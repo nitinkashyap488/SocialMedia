@@ -1,10 +1,5 @@
 import { FETCH_FOLLOWING_USER_STORY, FETCH_USER_STORY } from "./ActionType";
-
-// Define API base URL
-let API_BASE_URL = "http://localhost:5454";
-if (process.env.NODE_ENV === "production") {
-  API_BASE_URL = "socialmediaserver-production-5852.up.railway.app";
-}
+import { API_BASE_URL } from "../../Config/BaseUrl";
 
 export const findFollowingUserStory = (data) => async (dispatch) => {
   try {
